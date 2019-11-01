@@ -1,0 +1,12 @@
+subprojects {
+    repositories {
+        jcenter()
+    }
+    
+    group = "com.gakshintala.parkmycar"
+    version = "0.0.1-SNAPSHOT"
+
+    apply plugin: "java"
+}
+
+
