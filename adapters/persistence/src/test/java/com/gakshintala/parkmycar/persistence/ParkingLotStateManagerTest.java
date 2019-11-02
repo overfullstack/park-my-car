@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar;
+package com.gakshintala.parkmycar.persistence;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar;
+package com.gakshintala.parkmycar.persistence;
 
 import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
