@@ -1,7 +1,7 @@
 package com.gakshintala.parkmycar.response;
 
 import com.gakshintala.parkmycar.ResponseRenderer;
-import com.gakshintala.parkmycar.commands.createparkinglot.CreateParkingLotResult;
+import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotResult;
 import lombok.experimental.UtilityClass;
 
 /*
@@ -9,5 +9,8 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class ConsoleResponseRenderers {
-    ResponseRenderer<CreateParkingLotResult> createParkingLotResponseRenderer = result -> null; 
+    ResponseRenderer<CreateParkingLotResult> createParkingLotResponseRenderer = result ->
+            result.isSuccess()
+                    ? String.format("Created a parking lot with %d slots", result.getCreatedCapacity())
+                    : "Something went wrong, parking lot could not be created";
 }
