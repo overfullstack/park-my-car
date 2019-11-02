@@ -1,3 +1,4 @@
 rootProject.name = 'park-my-car'
 include 'core'
+include 'exchange'
 
