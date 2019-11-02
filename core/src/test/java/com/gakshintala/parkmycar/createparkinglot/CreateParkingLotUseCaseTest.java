@@ -6,14 +6,14 @@ import org.junit.jupiter.api.Test;
 
 class CreateParkingLotUseCaseTest {
 
+    public static final int TEST_CAPACITY = 6;
     private static final CreateParkingLot createParkingLotSuccessful = capacity -> true;
     private static final CreateParkingLot createParkingLotFailed = capacity -> false;
-    public static final int TEST_CAPACITY = 6;
 
     @Test
     void createParkingLotSuccessful() {
         final var createParkingLotSuccessfulUseCase = new CreateParkingLotUseCase(createParkingLotSuccessful);
-        Assertions.assertEquals(createParkingLotSuccessfulUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)), 
+        Assertions.assertEquals(createParkingLotSuccessfulUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)),
                 new CreateParkingLotResult(true, TEST_CAPACITY));
     }
 

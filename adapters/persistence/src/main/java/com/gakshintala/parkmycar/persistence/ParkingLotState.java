@@ -16,20 +16,11 @@ import static java.util.stream.Collectors.toCollection;
  * gakshintala created on 11/2/19.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParkingLotStateManager implements CreateParkingLot {
+public class ParkingLotState implements CreateParkingLot {
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
 
-    private static class SingletonHelper {
-        private static final ParkingLotStateManager INSTANCE = new ParkingLotStateManager();
-
-        private static void init(int capacity) {
-            INSTANCE.slotToCar = new HashMap<>();
-            INSTANCE.availableSlots = IntStream.rangeClosed(1, capacity).boxed().collect(toCollection(TreeSet::new));
-        }
-    }
-
-    public static ParkingLotStateManager getInstance() {
+    public static ParkingLotState getInstance() {
         return SingletonHelper.INSTANCE;
     }
 
@@ -37,5 +28,14 @@ public class ParkingLotStateManager implements CreateParkingLot {
     public boolean createParkingLot(int capacity) {
         SingletonHelper.init(capacity);
         return true;
+    }
+
+    private static class SingletonHelper {
+        private static final ParkingLotState INSTANCE = new ParkingLotState();
+
+        private static void init(int capacity) {
+            INSTANCE.slotToCar = new HashMap<>();
+            INSTANCE.availableSlots = IntStream.rangeClosed(1, capacity).boxed().collect(toCollection(TreeSet::new));
+        }
     }
 }

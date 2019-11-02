@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 @UtilityClass
 public class UseCaseExecutor {
     static Consumer<String> consolePrinter = System.out::println;
-    
+
     public static <InputT, ResultT> void executeForConsole(
             @NonNull UseCase<InputT, ResultT> useCase,
             @NonNull InputT input,

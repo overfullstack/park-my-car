@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/adapters" />
             <option value="$PROJECT_DIR$/adapters/exchange" />
             <option value="$PROJECT_DIR$/adapters/persistence" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
           </set>
         </option>

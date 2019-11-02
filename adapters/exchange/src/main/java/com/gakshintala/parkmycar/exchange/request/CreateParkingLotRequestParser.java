@@ -1,7 +1,7 @@
 package com.gakshintala.parkmycar.exchange.request;
 
-import com.gakshintala.parkmycar.exchange.RequestParser;
 import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotCommand;
+import com.gakshintala.parkmycar.exchange.RequestParser;
 import lombok.NonNull;
 import lombok.Value;
 
@@ -12,7 +12,7 @@ import lombok.Value;
 public class CreateParkingLotRequestParser implements RequestParser<CreateParkingLotCommand> {
     @NonNull
     String capacity;
-    
+
     @Override
     public CreateParkingLotCommand toCommand() {
         return new CreateParkingLotCommand(Integer.parseInt(capacity));

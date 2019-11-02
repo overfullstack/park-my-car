@@ -13,7 +13,7 @@ class CreateParkingLotUseCaseRequestParserTest {
     void toCommandWithNullCapacity() {
         assertThrows(NullPointerException.class, () -> new CreateParkingLotRequestParser(null));
     }
-    
+
     @Test
     void toCommandWithNonNumberCapacity() {
         assertThrows(NumberFormatException.class, () -> new CreateParkingLotRequestParser("").toCommand());
@@ -21,7 +21,7 @@ class CreateParkingLotUseCaseRequestParserTest {
 
     @Test
     void toCommandWithNumberCapacity() {
-        assertEquals(new CreateParkingLotRequestParser(TEST_CAPACITY).toCommand(), 
+        assertEquals(new CreateParkingLotRequestParser(TEST_CAPACITY).toCommand(),
                 new CreateParkingLotCommand(6));
     }
 }

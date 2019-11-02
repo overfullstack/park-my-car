@@ -10,10 +10,10 @@ import java.util.function.Consumer;
 class UseCaseExecutorTest {
 
     public static final String EXPECTED_STRING = "expected String";
+    private static final UseCase<String, String> dummyUseCase = ignore -> "ignore";
     private static String consoleResult;
     private static final Consumer<String> consolePrinterStub = strToPrint -> consoleResult = strToPrint;
-    private static final UseCase<String, String> dummyUseCase = ignore -> "ignore";
-    
+
     @Test
     void createParkingLotUseCaseExecution() {
         UseCaseExecutor.consolePrinter = consolePrinterStub;
