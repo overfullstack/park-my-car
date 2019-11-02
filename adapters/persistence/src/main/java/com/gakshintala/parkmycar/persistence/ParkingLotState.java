@@ -26,6 +26,9 @@ public class ParkingLotState implements CreateParkingLot {
 
     @Override
     public boolean createParkingLot(int capacity) {
+        if (SingletonHelper.isInitialized()) {
+            return false;
+        }
         SingletonHelper.init(capacity);
         return true;
     }
@@ -36,6 +39,10 @@ public class ParkingLotState implements CreateParkingLot {
         private static void init(int capacity) {
             INSTANCE.slotToCar = new HashMap<>();
             INSTANCE.availableSlots = IntStream.rangeClosed(1, capacity).boxed().collect(toCollection(TreeSet::new));
+        }
+
+        private static boolean isInitialized() {
+            return INSTANCE.slotToCar != null && INSTANCE.availableSlots != null;
         }
     }
 }

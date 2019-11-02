@@ -21,6 +21,6 @@ class ResultMappersTest {
     void createParkingLotResponseRendererFailed() {
         Assertions.assertEquals(
                 createParkingLotResultMapper.fromResult(new CreateParkingLotResult(false, TEST_CREATED_CAPACITY)),
-                "Something went wrong, parking lot could not be created");
+                String.format("Parking lot is already created with capacity %d", TEST_CREATED_CAPACITY));
     }
 }

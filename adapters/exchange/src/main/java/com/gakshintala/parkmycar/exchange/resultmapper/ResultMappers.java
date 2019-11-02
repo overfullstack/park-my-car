@@ -12,5 +12,5 @@ public class ResultMappers {
     public ResultMapper<CreateParkingLotResult> createParkingLotResultMapper = result ->
             result.isSuccess()
                     ? String.format("Created a parking lot with %d slots", result.getCreatedCapacity())
-                    : "Something went wrong, parking lot could not be created";
+                    : String.format("Parking lot is already created with capacity %d", result.getCreatedCapacity());
 }

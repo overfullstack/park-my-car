@@ -23,4 +23,25 @@ class ParkingLotStateTest {
         Assertions.assertNotNull(parkingLot.availableSlots);
         Assertions.assertEquals(parkingLot.availableSlots.size(), TEST_CAPACITY);
     }
+    
+    @Test
+    void createParkingLotMoreThanOnce() {
+        final var parkingLot = ParkingLotState.getInstance();
+        final var result1 = parkingLot.createParkingLot(TEST_CAPACITY);
+        final var result2 = parkingLot.createParkingLot(TEST_CAPACITY);
+        
+        Assertions.assertTrue(result1);
+        Assertions.assertFalse(result2);
+        
+        Assertions.assertNotNull(parkingLot.slotToCar);
+        Assertions.assertNotNull(parkingLot.availableSlots);
+        Assertions.assertEquals(parkingLot.availableSlots.size(), TEST_CAPACITY);
+    }
+    
+    @Test
+    void singleTon() {
+        final var parkingLot = ParkingLotState.getInstance();
+        parkingLot.createParkingLot(TEST_CAPACITY);
+        Assertions.assertSame(ParkingLotState.getInstance(), ParkingLotState.getInstance());
+    }
 }
