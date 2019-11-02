@@ -14,6 +14,7 @@ import static com.gakshintala.parkmycar.persistence.ParkingLotState.INVALID_SLOT
 class ParkingLotStateTest {
 
     public static final int TEST_CAPACITY = 6;
+    public static final int CONCURRENCY_EMULATED_SAME_SLOT = 1;
 
     @Test
     @Order(1)
@@ -55,5 +56,17 @@ class ParkingLotStateTest {
         IntStream.rangeClosed(1, TEST_CAPACITY).forEach(ignore -> parkingLot.park(new Car("regNo", "color")));
         Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")), 
                 new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT));
+    }
+    
+    @Test
+    void concurrentlyGettingTheSameSlot() {
+        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingLotState.getInstance();
+        parkingLot.getFirstFreeSlot = () -> CONCURRENCY_EMULATED_SAME_SLOT;
+        
+        Assertions.assertEquals(parkingLot.park(new Car("regNo", "color")),
+                new ParkCarResult(CarParkStatus.SUCCESS, CONCURRENCY_EMULATED_SAME_SLOT));
+        Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")),
+                new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT));
     }
 }

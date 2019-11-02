@@ -8,9 +8,9 @@ import com.gakshintala.parkmycar.ports.persistence.ParkCar;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
@@ -28,7 +28,7 @@ public class ParkingLotState implements CreateParkingLot, ParkCar {
         private static final ParkingLotState INSTANCE = new ParkingLotState();
 
         static void init(int capacity) {
-            INSTANCE.slotToCar = new HashMap<>();
+            INSTANCE.slotToCar = new ConcurrentHashMap<>();
             INSTANCE.availableSlots = IntStream.rangeClosed(1, capacity).boxed().collect(toCollection(TreeSet::new));
         }
 
@@ -65,6 +65,8 @@ public class ParkingLotState implements CreateParkingLot, ParkCar {
             availableSlots.remove(slot);
             return car;
         });
-        return new ParkCarResult(CarParkStatus.SUCCESS, firstFreeSlot);
+        return slotToCar.get(firstFreeSlot) == car
+                ? new ParkCarResult(CarParkStatus.SUCCESS, firstFreeSlot)
+                : new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT);
     }
 }
