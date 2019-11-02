@@ -12,9 +12,9 @@ public class CreateParkingLotUseCase implements UseCase<CreateParkingLotCommand,
     private final CreateParkingLot createParkingLot;
 
     @Override
-    public CreateParkingLotResult execute(CreateParkingLotCommand input) {
+    public CreateParkingLotResult execute(CreateParkingLotCommand command) {
         return new CreateParkingLotResult(
-                createParkingLot.createParkingLot(input.getCapacity()),
-                input.getCapacity());
+                createParkingLot.createParkingLot(command.getCapacity()),
+                command.getCapacity());
     }
 }
