@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar.request;
+package com.gakshintala.parkmycar.exchange.request;
 
 import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotCommand;
 import org.junit.jupiter.api.Test;

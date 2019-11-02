@@ -1,6 +1,6 @@
-package com.gakshintala.parkmycar.response;
+package com.gakshintala.parkmycar.exchange.resultmapper;
 
-import com.gakshintala.parkmycar.ResultMapper;
+import com.gakshintala.parkmycar.exchange.ResultMapper;
 import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotResult;
 import lombok.experimental.UtilityClass;
 

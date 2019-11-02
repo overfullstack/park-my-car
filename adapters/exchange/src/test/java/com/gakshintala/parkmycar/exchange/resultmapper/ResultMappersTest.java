@@ -1,10 +1,10 @@
-package com.gakshintala.parkmycar.response;
+package com.gakshintala.parkmycar.exchange.resultmapper;
 
 import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static com.gakshintala.parkmycar.response.ResultMappers.createParkingLotResultMapper;
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.createParkingLotResultMapper;
 
 class ResultMappersTest {
 

@@ -1,6 +1,6 @@
-package com.gakshintala.parkmycar.request;
+package com.gakshintala.parkmycar.exchange.request;
 
-import com.gakshintala.parkmycar.RequestParser;
+import com.gakshintala.parkmycar.exchange.RequestParser;
 import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotCommand;
 import lombok.NonNull;
 import lombok.Value;
