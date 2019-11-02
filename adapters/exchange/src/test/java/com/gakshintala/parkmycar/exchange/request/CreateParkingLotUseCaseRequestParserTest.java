@@ -10,7 +10,7 @@ class CreateParkingLotUseCaseRequestParserTest {
     public static final String TEST_CAPACITY = "6";
 
     @Test
-    void toCommandWithNullCapacity() {
+    void withNullCapacity() {
         assertThrows(NullPointerException.class, () -> new CreateParkingLotRequestParser(null));
     }
 
