@@ -1,4 +1,4 @@
 rootProject.name = 'park-my-car'
 include 'core'
-include 'exchange'
-
+include 'adapters:exchange'
+include 'adapters:persistence'
