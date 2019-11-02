@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar.createparkinglot;
+package com.gakshintala.parkmycar.usecases.createparkinglot;
 
 import lombok.Value;
 

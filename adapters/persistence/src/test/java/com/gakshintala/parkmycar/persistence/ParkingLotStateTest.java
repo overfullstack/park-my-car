@@ -2,7 +2,7 @@ package com.gakshintala.parkmycar.persistence;
 
 import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
-import com.gakshintala.parkmycar.parkcar.ParkCarResult;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

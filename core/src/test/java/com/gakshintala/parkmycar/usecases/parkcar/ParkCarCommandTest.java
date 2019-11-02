@@ -1,9 +1,7 @@
-package com.gakshintala.parkmycar.parkcar;
+package com.gakshintala.parkmycar.usecases.parkcar;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParkCarCommandTest {
 

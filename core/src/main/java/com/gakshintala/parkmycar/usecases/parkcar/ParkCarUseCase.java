@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar.parkcar;
+package com.gakshintala.parkmycar.usecases.parkcar;
 
 import com.gakshintala.parkmycar.ports.UseCase;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;

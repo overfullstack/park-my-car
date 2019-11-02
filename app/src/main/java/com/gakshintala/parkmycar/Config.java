@@ -1,11 +1,11 @@
 package com.gakshintala.parkmycar;
 
-import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotCommand;
-import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotResult;
-import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotUseCase;
-import com.gakshintala.parkmycar.parkcar.ParkCarCommand;
-import com.gakshintala.parkmycar.parkcar.ParkCarResult;
-import com.gakshintala.parkmycar.parkcar.ParkCarUseCase;
+import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotCommand;
+import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotResult;
+import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotUseCase;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarCommand;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarUseCase;
 import com.gakshintala.parkmycar.persistence.ParkingLotState;
 import com.gakshintala.parkmycar.ports.UseCase;
 import lombok.experimental.UtilityClass;

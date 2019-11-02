@@ -2,7 +2,7 @@ package com.gakshintala.parkmycar.exchange.request;
 
 import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.exchange.RequestParser;
-import com.gakshintala.parkmycar.parkcar.ParkCarCommand;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarCommand;
 import lombok.NonNull;
 import lombok.Value;
 

@@ -1,7 +1,7 @@
 package com.gakshintala.parkmycar.exchange.request;
 
 import com.gakshintala.parkmycar.domain.Car;
-import com.gakshintala.parkmycar.parkcar.ParkCarCommand;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarCommand;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

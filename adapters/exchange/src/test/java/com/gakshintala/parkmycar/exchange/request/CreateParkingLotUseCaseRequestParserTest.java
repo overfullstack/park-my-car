@@ -1,6 +1,6 @@
 package com.gakshintala.parkmycar.exchange.request;
 
-import com.gakshintala.parkmycar.createparkinglot.CreateParkingLotCommand;
+import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

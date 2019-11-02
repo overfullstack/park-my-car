@@ -1,4 +1,4 @@
-package com.gakshintala.parkmycar.parkcar;
+package com.gakshintala.parkmycar.usecases.parkcar;
 
 import com.gakshintala.parkmycar.domain.Car;
 import lombok.NonNull;

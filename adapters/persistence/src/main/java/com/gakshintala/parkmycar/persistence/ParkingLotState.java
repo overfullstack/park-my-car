@@ -2,7 +2,7 @@ package com.gakshintala.parkmycar.persistence;
 
 import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
-import com.gakshintala.parkmycar.parkcar.ParkCarResult;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;
 import lombok.AccessLevel;
