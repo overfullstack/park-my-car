@@ -2,9 +2,10 @@ package com.gakshintala.parkmycar.persistence;
 
 import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
-import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
+import com.gakshintala.parkmycar.ports.persistence.LeaveSlot;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;
+import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +21,8 @@ import static java.util.stream.Collectors.toCollection;
  * gakshintala created on 11/2/19.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParkingLotState implements CreateParkingLot, ParkCar {
+public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot {
+    int capacity;
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
 
@@ -28,6 +30,7 @@ public class ParkingLotState implements CreateParkingLot, ParkCar {
         private static final ParkingLotState INSTANCE = new ParkingLotState();
 
         static void init(int capacity) {
+            INSTANCE.capacity = capacity;
             INSTANCE.slotToCar = new ConcurrentHashMap<>();
             INSTANCE.availableSlots = IntStream.rangeClosed(1, capacity).boxed().collect(toCollection(TreeSet::new));
         }
@@ -68,5 +71,15 @@ public class ParkingLotState implements CreateParkingLot, ParkCar {
         return slotToCar.get(firstFreeSlot) == car
                 ? new ParkCarResult(CarParkStatus.SUCCESS, firstFreeSlot)
                 : new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT);
+    }
+
+    @Override
+    public boolean leave(int slotId) {
+        if (slotId < 1 || slotId > capacity) {
+            return false;
+        }
+        slotToCar.remove(slotId);
+        availableSlots.add(slotId);
+        return true;
     }
 }
