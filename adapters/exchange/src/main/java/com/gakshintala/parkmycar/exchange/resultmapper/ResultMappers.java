@@ -9,6 +9,7 @@ import lombok.experimental.UtilityClass;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -50,8 +51,11 @@ public class ResultMappers {
                             entry.getValue().getRegistrationNumber(),
                             entry.getValue().getColor()))
                     .collect(Collectors.joining("\n"));
-    
+
     public ResultMapper<Collection<String>> collectionToStringCommaSeparatedMapper = result ->
             String.join(", ", result);
 
+    public ResultMapper<Optional<Integer>> slotNumWithRegNumResultMapper = result ->
+            result.map(String::valueOf)
+                    .orElse("Car with given registration No. not found");
 }
