@@ -17,8 +17,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #   ruby $DIR/../main.rb $1
 # 
 # Important: Above commands is just examples, please modify to suit your requirement as necessary
-#java -cp "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.appJar com.gakshintala.parkmycar.ParkMyCarApplication "$1"
-#java -appJar "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.appJar "$1"
+#java -cp "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar com.gakshintala.parkmycar.ParkMyCarApplication "$1"
+#java -jar "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar "$1"
 
 ##appJar file name
 appJar="$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar
@@ -26,8 +26,8 @@ appJar="$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar
 #../../gradlew -p "$DIR"/../../ clean shadowJar test
 
 if [ -z "$1" ] ; then
-    java -cp "$appJar" com.gakshintala.parkmycar.ParkMyCarApplication
+    java -jar "$appJar"
     exit 1
 else
-	  java -cp "$appJar" com.gakshintala.parkmycar.ParkMyCarApplication "$1"
+	  java -jar "$appJar" "$1"
 fi

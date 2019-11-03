@@ -38,8 +38,8 @@ public class ResultMappers {
                     ? String.format("Slot number %d is free", result.getSlotId())
                     : String.format("Slot %d not found", result.getSlotId());
 
-    static final String STATUS_TABLE_HEADER_FORMAT = "%1$-10s%2$-18s%3$-20s";
-    static final String STATUS_TABLE_ENTRY_FORMAT = "%1$-10d%2$-18s%3$-20s";
+    static final String STATUS_TABLE_HEADER_FORMAT = "%1$-12s%2$-19s%3$-20s";
+    static final String STATUS_TABLE_ENTRY_FORMAT = "%1$-12d%2$-19s%3$-20s";
     public ResultMapper<Map<Integer, Car>> lotStatusMapper = result ->
             result.isEmpty()
                     ? "Parking Lot is Empty"
@@ -57,5 +57,5 @@ public class ResultMappers {
 
     public ResultMapper<Optional<Integer>> slotNumWithRegNumResultMapper = result ->
             result.map(String::valueOf)
-                    .orElse("Car with given registration No. not found");
+                    .orElse("Not found");
 }

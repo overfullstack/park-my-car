@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.STATUS_TABLE_ENTRY_FORMAT;
@@ -19,6 +20,7 @@ import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.crea
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.leaveSlotResultMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.lotStatusMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.parkCarResultMapper;
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.slotNumWithRegNumResultMapper;
 
 class ResultMappersTest {
 
@@ -76,7 +78,7 @@ class ResultMappersTest {
                         + "\n"
                         + String.format(STATUS_TABLE_ENTRY_FORMAT, 1, "KA-01-HH-1234", "White"));
     }
-    
+
     @Test
     void collectionToStringCommaSeparatedWithEmptyCollection() {
         Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Collections.emptySet()), "");
@@ -85,5 +87,16 @@ class ResultMappersTest {
     @Test
     void collectionToStringCommaSeparatedWithSizeOneCollection() {
         Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Set.of("a")), "a");
+    }
+
+    @Test
+    void slotNumWithRegNumResultMapperNotFound() {
+        Assertions.assertEquals(slotNumWithRegNumResultMapper.fromResult(Optional.empty()), "Not found");
+    }
+
+    @Test
+    void slotNumWithRegNumResultMapper() {
+        Assertions.assertEquals(slotNumWithRegNumResultMapper.fromResult(Optional.of(VALID_SLOT_ID)),
+                String.valueOf(VALID_SLOT_ID));
     }
 }
