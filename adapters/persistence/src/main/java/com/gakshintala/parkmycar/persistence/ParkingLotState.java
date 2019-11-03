@@ -22,13 +22,13 @@ import static java.util.stream.Collectors.toCollection;
  * gakshintala created on 11/2/19.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParkingQueryLotState implements CreateParkingLot, ParkCar, LeaveSlot, QueryLotStatus {
+public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, QueryLotStatus {
     int capacity;
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
 
     static class SingletonHelper {
-        private static final ParkingQueryLotState INSTANCE = new ParkingQueryLotState();
+        private static final ParkingLotState INSTANCE = new ParkingLotState();
 
         static void init(int capacity) {
             INSTANCE.capacity = capacity;
@@ -46,7 +46,7 @@ public class ParkingQueryLotState implements CreateParkingLot, ParkCar, LeaveSlo
     Supplier<Integer> getFirstFreeSlot = () -> availableSlots.first();
     Supplier<Boolean> isLotFull = () -> availableSlots.size() == 0;
 
-    public static ParkingQueryLotState getInstance() {
+    public static ParkingLotState getInstance() {
         return SingletonHelper.INSTANCE;
     }
 

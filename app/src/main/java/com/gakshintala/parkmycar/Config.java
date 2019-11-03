@@ -1,7 +1,7 @@
 package com.gakshintala.parkmycar;
 
 import com.gakshintala.parkmycar.domain.Car;
-import com.gakshintala.parkmycar.persistence.ParkingQueryLotState;
+import com.gakshintala.parkmycar.persistence.ParkingLotState;
 import com.gakshintala.parkmycar.ports.UseCase;
 import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotCommand;
 import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotResult;
@@ -29,30 +29,30 @@ import java.util.Optional;
 public class Config {
 
     static UseCase<CreateParkingLotCommand, CreateParkingLotResult> createParkingLotUseCase() {
-        return new CreateParkingLotUseCase(ParkingQueryLotState.getInstance());
+        return new CreateParkingLotUseCase(ParkingLotState.getInstance());
     }
 
     static UseCase<ParkCarCommand, ParkCarResult> parkCarUseCase() {
-        return new ParkCarUseCase(ParkingQueryLotState.getInstance());
+        return new ParkCarUseCase(ParkingLotState.getInstance());
     }
 
     static UseCase<LeaveSlotCommand, LeaveSlotResult> leaveSlot() {
-        return new LeaveSlotUseCase(ParkingQueryLotState.getInstance());
+        return new LeaveSlotUseCase(ParkingLotState.getInstance());
     }
 
     static UseCase<Void, Map<Integer, Car>> lotStatusQuery() {
-        return new LotStatusQuery(ParkingQueryLotState.getInstance());
+        return new LotStatusQuery(ParkingLotState.getInstance());
     }
 
     static UseCase<String, Collection<String>> regNumsWithColorQuery() {
-        return new RegNumsWithColorQuery(ParkingQueryLotState.getInstance());
+        return new RegNumsWithColorQuery(ParkingLotState.getInstance());
     }
 
     static UseCase<String, Collection<String>> slotNumsWithColorQuery() {
-        return new SlotNumsWithColorQuery(ParkingQueryLotState.getInstance());
+        return new SlotNumsWithColorQuery(ParkingLotState.getInstance());
     }
 
     static UseCase<String, Optional<Integer>> slotNumsWithRegNumQuery() {
-        return new SlotNumWithRegNumQuery(ParkingQueryLotState.getInstance());
+        return new SlotNumWithRegNumQuery(ParkingLotState.getInstance());
     }
 }
