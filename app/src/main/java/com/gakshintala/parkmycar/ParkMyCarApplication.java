@@ -9,8 +9,9 @@ import java.util.Scanner;
 
 import static com.gakshintala.parkmycar.Config.createParkingLotUseCase;
 import static com.gakshintala.parkmycar.Config.leaveSlot;
-import static com.gakshintala.parkmycar.Config.lotStatus;
+import static com.gakshintala.parkmycar.Config.lotStatusQuery;
 import static com.gakshintala.parkmycar.Config.parkCarUseCase;
+import static com.gakshintala.parkmycar.Config.regNumsWithColorQuery;
 
 /**
  * gakshintala created on 11/2/19.
@@ -42,10 +43,16 @@ public class ParkMyCarApplication {
                     break;
                 case STATUS:
                     UseCaseExecutor.executeForConsole(
-                            lotStatus(),
+                            lotStatusQuery(),
                             null,
                             ResultMappers.lotStatusMapper);
-                    break;  
+                    break;
+                case REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
+                    UseCaseExecutor.executeForConsole(
+                            regNumsWithColorQuery(),
+                            commandArgs[1],
+                            ResultMappers.regNumsWithColorMapper);
+                    break;
                 case EXIT:
                     return;
             }

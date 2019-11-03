@@ -8,6 +8,6 @@ import java.util.Map;
  * gakshintala created on 11/3/19.
  */
 @FunctionalInterface
-public interface LotStatus {
+public interface QueryLotStatus {
     Map<Integer, Car> status();
 }

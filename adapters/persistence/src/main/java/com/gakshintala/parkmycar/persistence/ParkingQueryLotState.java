@@ -4,7 +4,7 @@ import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
 import com.gakshintala.parkmycar.ports.persistence.LeaveSlot;
-import com.gakshintala.parkmycar.ports.persistence.LotStatus;
+import com.gakshintala.parkmycar.ports.persistence.QueryLotStatus;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import lombok.AccessLevel;
@@ -22,13 +22,13 @@ import static java.util.stream.Collectors.toCollection;
  * gakshintala created on 11/2/19.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, LotStatus {
+public class ParkingQueryLotState implements CreateParkingLot, ParkCar, LeaveSlot, QueryLotStatus {
     int capacity;
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
 
     static class SingletonHelper {
-        private static final ParkingLotState INSTANCE = new ParkingLotState();
+        private static final ParkingQueryLotState INSTANCE = new ParkingQueryLotState();
 
         static void init(int capacity) {
             INSTANCE.capacity = capacity;
@@ -46,7 +46,7 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Lo
     Supplier<Integer> getFirstFreeSlot = () -> availableSlots.first();
     Supplier<Boolean> isLotFull = () -> availableSlots.size() == 0;
 
-    public static ParkingLotState getInstance() {
+    public static ParkingQueryLotState getInstance() {
         return SingletonHelper.INSTANCE;
     }
 

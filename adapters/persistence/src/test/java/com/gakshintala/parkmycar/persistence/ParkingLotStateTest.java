@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import static com.gakshintala.parkmycar.persistence.ParkingLotState.INVALID_SLOT;
+import static com.gakshintala.parkmycar.persistence.ParkingQueryLotState.INVALID_SLOT;
 
 class ParkingLotStateTest {
 
@@ -19,8 +19,8 @@ class ParkingLotStateTest {
 
     @Test
     void createParkingLot() {
-        final var parkingLot = ParkingLotState.getInstance();
-        if (!ParkingLotState.SingletonHelper.isInitialized()) {
+        final var parkingLot = ParkingQueryLotState.getInstance();
+        if (!ParkingQueryLotState.SingletonHelper.isInitialized()) {
             Assertions.assertNull(parkingLot.slotToCar);
             Assertions.assertNull(parkingLot.availableSlots);
             final var createOnceResult = parkingLot.createParkingLot(TEST_CAPACITY);
@@ -37,67 +37,67 @@ class ParkingLotStateTest {
 
     @Test
     void isSingleTon() {
-        final var parkingLot = ParkingLotState.getInstance();
+        final var parkingLot = ParkingQueryLotState.getInstance();
         parkingLot.createParkingLot(TEST_CAPACITY);
-        Assertions.assertSame(ParkingLotState.getInstance(), ParkingLotState.getInstance());
+        Assertions.assertSame(ParkingQueryLotState.getInstance(), ParkingQueryLotState.getInstance());
     }
 
     @Test
     void parkCarSuccessful() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         Assertions.assertEquals(parkingLot.park(new Car("regNo", "color")),
                 new ParkCarResult(CarParkStatus.SUCCESS, 1));
     }
 
     @Test
     void parkCarLotFull() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         IntStream.rangeClosed(1, TEST_CAPACITY).forEach(ignore -> parkingLot.park(new Car("regNo", "color")));
-        Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")),
+        Assertions.assertEquals(ParkingQueryLotState.getInstance().park(new Car("regNo", "color")),
                 new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT));
     }
 
     @Test
     void concurrentlyGettingTheSameSlot() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         parkingLot.getFirstFreeSlot = () -> CONCURRENCY_EMULATED_SAME_SLOT;
 
         Assertions.assertEquals(parkingLot.park(new Car("regNo", "color")),
                 new ParkCarResult(CarParkStatus.SUCCESS, CONCURRENCY_EMULATED_SAME_SLOT));
-        Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")),
+        Assertions.assertEquals(ParkingQueryLotState.getInstance().park(new Car("regNo", "color")),
                 new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT));
     }
 
     @Test
     void leaveValidSlot() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
     }
 
     @Test
     void leaveValidSlotIdempotent() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
         Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
     }
 
     @Test
     void leaveInvalidSlot() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         Assertions.assertFalse(parkingLot.leave(0));
         Assertions.assertFalse(parkingLot.leave(TEST_CAPACITY + 1));
     }
 
     @Test
     void status() {
-        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
-        final var parkingLot = ParkingLotState.getInstance();
+        ParkingQueryLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingQueryLotState.getInstance();
         final var car1 = new Car("regNo", "color");
         final var car2 = new Car("regNo", "color");
         final var car1ParkResult = parkingLot.park(car1);

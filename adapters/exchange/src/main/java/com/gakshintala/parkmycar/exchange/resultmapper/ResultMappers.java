@@ -7,6 +7,7 @@ import com.gakshintala.parkmycar.usecases.leaveslot.LeaveSlotResult;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import lombok.experimental.UtilityClass;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -49,4 +50,6 @@ public class ResultMappers {
                             entry.getValue().getRegistrationNumber(),
                             entry.getValue().getColor()))
                     .collect(Collectors.joining("\n"));
+    
+    public ResultMapper<Collection<String>> regNumsWithColorMapper = result -> String.join(", ", result);
 }
