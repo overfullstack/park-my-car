@@ -6,6 +6,7 @@ import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
 import java.util.stream.IntStream;
 
 import static com.gakshintala.parkmycar.persistence.ParkingLotState.INVALID_SLOT;
@@ -14,6 +15,7 @@ class ParkingLotStateTest {
 
     public static final int TEST_CAPACITY = 6;
     public static final int CONCURRENCY_EMULATED_SAME_SLOT = 1;
+    public static final int TEST_VALID_SLOT_ID = 1;
 
     @Test
     void createParkingLot() {
@@ -73,7 +75,15 @@ class ParkingLotStateTest {
     void leaveValidSlot() {
         ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
         final var parkingLot = ParkingLotState.getInstance();
-        Assertions.assertTrue(parkingLot.leave(1));
+        Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
+    }
+
+    @Test
+    void leaveValidSlotIdempotent() {
+        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingLotState.getInstance();
+        Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
+        Assertions.assertTrue(parkingLot.leave(TEST_VALID_SLOT_ID));
     }
 
     @Test
@@ -82,5 +92,18 @@ class ParkingLotStateTest {
         final var parkingLot = ParkingLotState.getInstance();
         Assertions.assertFalse(parkingLot.leave(0));
         Assertions.assertFalse(parkingLot.leave(TEST_CAPACITY + 1));
+    }
+
+    @Test
+    void status() {
+        ParkingLotState.SingletonHelper.init(TEST_CAPACITY);
+        final var parkingLot = ParkingLotState.getInstance();
+        final var car1 = new Car("regNo", "color");
+        final var car2 = new Car("regNo", "color");
+        final var car1ParkResult = parkingLot.park(car1);
+        final var car2ParkResult = parkingLot.park(car2);
+        parkingLot.leave(car1ParkResult.getSlotId());
+        final var expectedStatus = Map.of(car2ParkResult.getSlotId(), car2);
+        Assertions.assertEquals(expectedStatus, parkingLot.status());
     }
 }

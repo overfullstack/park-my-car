@@ -1,12 +1,15 @@
 package com.gakshintala.parkmycar;
 
 import com.gakshintala.parkmycar.exchange.request.CreateParkingLotRequestParser;
+import com.gakshintala.parkmycar.exchange.request.LeaveSlotRequestParser;
 import com.gakshintala.parkmycar.exchange.request.ParkCarRequestParser;
 import com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers;
 
 import java.util.Scanner;
 
 import static com.gakshintala.parkmycar.Config.createParkingLotUseCase;
+import static com.gakshintala.parkmycar.Config.leaveSlot;
+import static com.gakshintala.parkmycar.Config.lotStatus;
 import static com.gakshintala.parkmycar.Config.parkCarUseCase;
 
 /**
@@ -31,6 +34,18 @@ public class ParkMyCarApplication {
                             new ParkCarRequestParser(commandArgs[1], commandArgs[2]).toCommand(),
                             ResultMappers.parkCarResultMapper);
                     break;
+                case LEAVE:
+                    UseCaseExecutor.executeForConsole(
+                            leaveSlot(),
+                            new LeaveSlotRequestParser(commandArgs[1]).toCommand(),
+                            ResultMappers.leaveSlotResultMapper);
+                    break;
+                case STATUS:
+                    UseCaseExecutor.executeForConsole(
+                            lotStatus(),
+                            null,
+                            ResultMappers.lotStatusMapper);
+                    break;  
                 case EXIT:
                     return;
             }

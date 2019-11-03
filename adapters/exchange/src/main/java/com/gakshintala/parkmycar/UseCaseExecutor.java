@@ -16,7 +16,7 @@ public class UseCaseExecutor {
 
     public static <InputT, ResultT> void executeForConsole(
             @NonNull UseCase<InputT, ResultT> useCase,
-            @NonNull InputT input,
+            InputT input,
             @NonNull ResultMapper<ResultT> outputMapper) {
         consolePrinter.accept(
                 outputMapper.fromResult(useCase.execute(input))

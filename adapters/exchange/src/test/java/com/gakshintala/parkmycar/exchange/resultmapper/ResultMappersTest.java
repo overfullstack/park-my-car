@@ -1,14 +1,20 @@
 package com.gakshintala.parkmycar.exchange.resultmapper;
 
-import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotResult;
+import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
+import com.gakshintala.parkmycar.usecases.createparkinglot.CreateParkingLotResult;
 import com.gakshintala.parkmycar.usecases.leaveslot.LeaveSlotResult;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.STATUS_TABLE_ENTRY_FORMAT;
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.STATUS_TABLE_HEADER_FORMAT;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.createParkingLotResultMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.leaveSlotResultMapper;
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.lotStatusMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.parkCarResultMapper;
 
 class ResultMappersTest {
@@ -30,7 +36,7 @@ class ResultMappersTest {
                 createParkingLotResultMapper.fromResult(new CreateParkingLotResult(false, TEST_CREATED_CAPACITY)),
                 String.format("Parking lot is already created with capacity %d", TEST_CREATED_CAPACITY));
     }
-    
+
     @Test
     void parkCarResponseMapperSuccessful() {
         Assertions.assertEquals(parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.SUCCESS, 1)),
@@ -42,7 +48,7 @@ class ResultMappersTest {
         Assertions.assertEquals(parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.LOT_FULL, 1)),
                 "Sorry, parking lot is full");
     }
-    
+
     @Test
     void leaveSlotResponseMapperSlotNotFound() {
         Assertions.assertEquals(leaveSlotResultMapper.fromResult(new LeaveSlotResult(false, INVALID_SLOT_ID)),
@@ -53,5 +59,18 @@ class ResultMappersTest {
     void leaveSlotResponseMapperSuccessful() {
         Assertions.assertEquals(leaveSlotResultMapper.fromResult(new LeaveSlotResult(true, VALID_SLOT_ID)),
                 String.format("Slot number %d is free", VALID_SLOT_ID));
+    }
+
+    @Test
+    void lotStatusMapperWithEmptyResult() {
+        Assertions.assertEquals(lotStatusMapper.fromResult(Map.of()), "Parking Lot is Empty");
+    }
+
+    @Test
+    void lotStatusMapperWithOneEntry() {
+        Assertions.assertEquals(lotStatusMapper.fromResult(Map.of(1, new Car("KA-01-HH-1234", "White"))),
+                String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")
+                        + "\n"
+                        + String.format(STATUS_TABLE_ENTRY_FORMAT, 1, "KA-01-HH-1234", "White"));
     }
 }

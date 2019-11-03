@@ -4,6 +4,7 @@ import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
 import com.gakshintala.parkmycar.ports.persistence.LeaveSlot;
+import com.gakshintala.parkmycar.ports.persistence.LotStatus;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import lombok.AccessLevel;
@@ -21,7 +22,7 @@ import static java.util.stream.Collectors.toCollection;
  * gakshintala created on 11/2/19.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot {
+public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, LotStatus {
     int capacity;
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
@@ -81,5 +82,10 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot {
         slotToCar.remove(slotId);
         availableSlots.add(slotId);
         return true;
+    }
+
+    @Override
+    public Map<Integer, Car> status() {
+        return slotToCar;
     }
 }
