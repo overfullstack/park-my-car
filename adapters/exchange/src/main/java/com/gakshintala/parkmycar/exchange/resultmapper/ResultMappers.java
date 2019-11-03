@@ -51,5 +51,7 @@ public class ResultMappers {
                             entry.getValue().getColor()))
                     .collect(Collectors.joining("\n"));
     
-    public ResultMapper<Collection<String>> regNumsWithColorMapper = result -> String.join(", ", result);
+    public ResultMapper<Collection<String>> collectionToStringCommaSeparatedMapper = result ->
+            String.join(", ", result);
+
 }

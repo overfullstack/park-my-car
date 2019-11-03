@@ -8,10 +8,13 @@ import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.STATUS_TABLE_ENTRY_FORMAT;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.STATUS_TABLE_HEADER_FORMAT;
+import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.collectionToStringCommaSeparatedMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.createParkingLotResultMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.leaveSlotResultMapper;
 import static com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers.lotStatusMapper;
@@ -72,5 +75,15 @@ class ResultMappersTest {
                 String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")
                         + "\n"
                         + String.format(STATUS_TABLE_ENTRY_FORMAT, 1, "KA-01-HH-1234", "White"));
+    }
+    
+    @Test
+    void collectionToStringCommaSeparatedWithEmptyCollection() {
+        Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Collections.emptySet()), "");
+    }
+
+    @Test
+    void collectionToStringCommaSeparatedWithSizeOneCollection() {
+        Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Set.of("a")), "a");
     }
 }

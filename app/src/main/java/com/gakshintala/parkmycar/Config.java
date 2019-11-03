@@ -11,6 +11,7 @@ import com.gakshintala.parkmycar.usecases.leaveslot.LeaveSlotResult;
 import com.gakshintala.parkmycar.usecases.leaveslot.LeaveSlotUseCase;
 import com.gakshintala.parkmycar.usecases.lotqueries.LotStatusQuery;
 import com.gakshintala.parkmycar.usecases.lotqueries.RegNumsWithColorQuery;
+import com.gakshintala.parkmycar.usecases.lotqueries.SlotNumsWithColorQuery;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarCommand;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarUseCase;
@@ -43,5 +44,9 @@ public class Config {
 
     static UseCase<String, Collection<String>> regNumsWithColorQuery() {
         return new RegNumsWithColorQuery(ParkingQueryLotState.getInstance());
+    }
+
+    static UseCase<String, Collection<String>> slotNumsWithColorQuery() {
+        return new SlotNumsWithColorQuery(ParkingQueryLotState.getInstance());
     }
 }
