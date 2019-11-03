@@ -38,4 +38,4 @@ build/
 .LSOverride
 *.bin
 *.bin.idx
-/parking_lot/functional_spec/.rspec_status
+/functional_spec/.rspec_status
