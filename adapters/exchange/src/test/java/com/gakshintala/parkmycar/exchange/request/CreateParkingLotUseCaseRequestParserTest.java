@@ -21,7 +21,7 @@ class CreateParkingLotUseCaseRequestParserTest {
 
     @Test
     void toCommandWithNumberCapacity() {
-        assertEquals(new CreateParkingLotRequestParser(TEST_CAPACITY).toCommand(),
-                new CreateParkingLotCommand(6));
+        assertEquals(new CreateParkingLotCommand(6),
+                new CreateParkingLotRequestParser(TEST_CAPACITY).toCommand());
     }
 }

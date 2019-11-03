@@ -21,7 +21,7 @@ class LeaveSlotRequestParserTest {
 
     @Test
     void toCommandWithNumberCapacity() {
-        assertEquals(new LeaveSlotRequestParser(TEST_CAPACITY).toCommand(),
-                new LeaveSlotCommand(6));
+        assertEquals(new LeaveSlotCommand(6),
+                new LeaveSlotRequestParser(TEST_CAPACITY).toCommand());
     }
 }

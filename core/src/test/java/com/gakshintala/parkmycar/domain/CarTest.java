@@ -13,6 +13,6 @@ class CarTest {
     @Test
     void propertiesAreEmpty() {
         final var carPropsEmptyException = Assertions.assertThrows(RuntimeException.class, () -> new Car("", ""));
-        Assertions.assertTrue(carPropsEmptyException.getMessage().contains("Car properties can't be empty"));
+        Assertions.assertTrue(carPropsEmptyException.getMessage().equalsIgnoreCase("Car properties can't be empty"));
     }
 }

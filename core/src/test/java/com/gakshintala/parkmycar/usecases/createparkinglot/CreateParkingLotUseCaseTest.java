@@ -13,14 +13,14 @@ class CreateParkingLotUseCaseTest {
     @Test
     void createParkingLotSuccessful() {
         final var createParkingLotSuccessfulUseCase = new CreateParkingLotUseCase(createParkingLotSuccessful);
-        Assertions.assertEquals(createParkingLotSuccessfulUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)),
-                new CreateParkingLotResult(true, TEST_CAPACITY));
+        Assertions.assertEquals(new CreateParkingLotResult(true, TEST_CAPACITY),
+                createParkingLotSuccessfulUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)));
     }
 
     @Test
     void createParkingLotFailed() {
         final var createParkingLotFailedUseCase = new CreateParkingLotUseCase(createParkingLotFailed);
-        Assertions.assertEquals(createParkingLotFailedUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)),
-                new CreateParkingLotResult(false, TEST_CAPACITY));
+        Assertions.assertEquals(new CreateParkingLotResult(false, TEST_CAPACITY),
+                createParkingLotFailedUseCase.execute(new CreateParkingLotCommand(TEST_CAPACITY)));
     }
 }

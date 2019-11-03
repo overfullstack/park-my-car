@@ -27,7 +27,7 @@ class ParkCarRequestParserTest {
     
     @Test
     void toCommandWithValidProperties() {
-        assertEquals(new ParkCarRequestParser(TEST_REG_NO, TEST_COLOR).toCommand(),
-                new ParkCarCommand(new Car(TEST_REG_NO, TEST_COLOR)));
+        assertEquals(new ParkCarCommand(new Car(TEST_REG_NO, TEST_COLOR)),
+                new ParkCarRequestParser(TEST_REG_NO, TEST_COLOR).toCommand());
     }
 }

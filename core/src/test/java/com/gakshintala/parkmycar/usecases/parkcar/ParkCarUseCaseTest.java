@@ -17,21 +17,21 @@ class ParkCarUseCaseTest {
     @Test
     void parkCarLotFull() {
         final var parkCarUseCase = new ParkCarUseCase(parkCarLotFull);
-        Assertions.assertEquals(parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))),
-                new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT),
+                parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))));
     }
 
     @Test
     void parkCarSlotTaken() {
         final var parkCarUseCase = new ParkCarUseCase(parkCarSlotTaken);
-        Assertions.assertEquals(parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))),
-                new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT),
+                parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))));
     }
 
     @Test
     void parkCarSuccessful() {
         final var parkCarUseCase = new ParkCarUseCase(parkCarSuccessful);
-        Assertions.assertEquals(parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))),
-                new ParkCarResult(CarParkStatus.SUCCESS, TEST_SLOT));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.SUCCESS, TEST_SLOT),
+                parkCarUseCase.execute(new ParkCarCommand(new Car("regNo", "color"))));
     }
 }

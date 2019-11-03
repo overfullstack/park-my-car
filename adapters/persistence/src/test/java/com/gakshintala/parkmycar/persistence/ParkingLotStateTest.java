@@ -27,25 +27,25 @@ class ParkingLotStateTest {
     
     @Test
     void parkCarSuccessful() {
-        Assertions.assertEquals(parkingLot.park(new Car("regNo", "color")),
-                new ParkCarResult(CarParkStatus.SUCCESS, 1));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.SUCCESS, 1),
+                parkingLot.park(new Car("regNo", "color")));
     }
 
     @Test
     void parkCarLotFull() {
         IntStream.rangeClosed(1, TEST_CAPACITY).forEach(ignore -> parkingLot.park(new Car("regNo", "color")));
-        Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")),
-                new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT),
+                ParkingLotState.getInstance().park(new Car("regNo", "color")));
     }
 
     @Test
     void concurrentlyGettingTheSameSlot() {
         parkingLot.getFirstFreeSlot = () -> CONCURRENCY_EMULATED_SAME_SLOT;
 
-        Assertions.assertEquals(parkingLot.park(new Car("regNo", "color")),
-                new ParkCarResult(CarParkStatus.SUCCESS, CONCURRENCY_EMULATED_SAME_SLOT));
-        Assertions.assertEquals(ParkingLotState.getInstance().park(new Car("regNo", "color")),
-                new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.SUCCESS, CONCURRENCY_EMULATED_SAME_SLOT),
+                parkingLot.park(new Car("regNo", "color")));
+        Assertions.assertEquals(new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT),
+                ParkingLotState.getInstance().park(new Car("regNo", "color")));
         parkingLot.getFirstFreeSlot = () -> parkingLot.availableSlots.first();
     }
 
@@ -92,6 +92,6 @@ class ParkingLotStateTest {
         parkingLot.leave(car2ParkResult.getSlotId());
         final var car4ParkResult = parkingLot.park(car4);
         
-        Assertions.assertEquals(car4ParkResult.getSlotId(), 2);
+        Assertions.assertEquals(2, car4ParkResult.getSlotId());
     }
 }

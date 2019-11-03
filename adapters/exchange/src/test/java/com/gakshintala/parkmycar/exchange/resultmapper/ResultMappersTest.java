@@ -31,67 +31,68 @@ class ResultMappersTest {
     @Test
     void createParkingLotResponseMapperSuccessful() {
         Assertions.assertEquals(
-                createParkingLotResultMapper.fromResult(new CreateParkingLotResult(true, TEST_CREATED_CAPACITY)),
-                String.format("Created a parking lot with %d slots", TEST_CREATED_CAPACITY));
+                String.format("Created a parking lot with %d slots", TEST_CREATED_CAPACITY),
+                createParkingLotResultMapper.fromResult(new CreateParkingLotResult(true, TEST_CREATED_CAPACITY)));
     }
 
     @Test
     void createParkingLotResponseMapperFailed() {
         Assertions.assertEquals(
-                createParkingLotResultMapper.fromResult(new CreateParkingLotResult(false, TEST_CREATED_CAPACITY)),
-                String.format("Parking lot is already created with capacity %d", TEST_CREATED_CAPACITY));
+                String.format("Parking lot is already created with capacity %d", TEST_CREATED_CAPACITY),
+                createParkingLotResultMapper.fromResult(new CreateParkingLotResult(false, TEST_CREATED_CAPACITY)));
     }
 
     @Test
     void parkCarResponseMapperSuccessful() {
-        Assertions.assertEquals(parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.SUCCESS, 1)),
-                String.format("Allocated slot number: %d", 1));
+        Assertions.assertEquals(String.format("Allocated slot number: %d", 1),
+                parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.SUCCESS, 1)));
     }
 
     @Test
     void parkCarResponseMapperLotFull() {
-        Assertions.assertEquals(parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.LOT_FULL, 1)),
-                "Sorry, parking lot is full");
+        Assertions.assertEquals("Sorry, parking lot is full",
+                parkCarResultMapper.fromResult(new ParkCarResult(CarParkStatus.LOT_FULL, 1)));
     }
 
     @Test
     void leaveSlotResponseMapperSlotNotFound() {
-        Assertions.assertEquals(leaveSlotResultMapper.fromResult(new LeaveSlotResult(false, INVALID_SLOT_ID)),
-                String.format("Slot %d not found", INVALID_SLOT_ID));
+        Assertions.assertEquals(String.format("Slot %d not found", INVALID_SLOT_ID),
+                leaveSlotResultMapper.fromResult(new LeaveSlotResult(false, INVALID_SLOT_ID)));
     }
 
     @Test
     void leaveSlotResponseMapperSuccessful() {
-        Assertions.assertEquals(leaveSlotResultMapper.fromResult(new LeaveSlotResult(true, VALID_SLOT_ID)),
-                String.format("Slot number %d is free", VALID_SLOT_ID));
+        Assertions.assertEquals(String.format("Slot number %d is free", VALID_SLOT_ID),
+                leaveSlotResultMapper.fromResult(new LeaveSlotResult(true, VALID_SLOT_ID)));
     }
 
     @Test
     void lotStatusMapperWithEmptyResult() {
-        Assertions.assertEquals(lotStatusMapper.fromResult(Map.of()), "Parking Lot is Empty");
+        Assertions.assertEquals("Parking Lot is Empty", lotStatusMapper.fromResult(Map.of()));
     }
 
     @Test
     void lotStatusMapperWithNullResult() {
-        Assertions.assertEquals(lotStatusMapper.fromResult(null), "Parking Lot is not yet Created");
+        Assertions.assertEquals("Parking Lot is not yet Created", lotStatusMapper.fromResult(null));
     }
 
     @Test
     void lotStatusMapperWithOneEntry() {
-        Assertions.assertEquals(lotStatusMapper.fromResult(Map.of(1, new Car("KA-01-HH-1234", "White"))),
+        Assertions.assertEquals(
                 String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")
-                        + "\n"
-                        + String.format(STATUS_TABLE_ENTRY_FORMAT, 1, "KA-01-HH-1234", "White"));
+                        + "\r\n"
+                        + String.format(STATUS_TABLE_ENTRY_FORMAT, 1, "KA-01-HH-1234", "White"),
+                lotStatusMapper.fromResult(Map.of(1, new Car("KA-01-HH-1234", "White"))));
     }
 
     @Test
     void collectionToStringCommaSeparatedWithEmptyCollection() {
-        Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Collections.emptySet()), "");
+        Assertions.assertEquals("", collectionToStringCommaSeparatedMapper.fromResult(Collections.emptySet()));
     }
 
     @Test
     void collectionToStringCommaSeparatedWithSizeOneCollection() {
-        Assertions.assertEquals(collectionToStringCommaSeparatedMapper.fromResult(Set.of("a")), "a");
+        Assertions.assertEquals("a", collectionToStringCommaSeparatedMapper.fromResult(Set.of("a")));
     }
 
     @Test

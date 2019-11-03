@@ -21,7 +21,7 @@ class ParkingLotStateSingleTonTest {
         Assertions.assertEquals(parkingLot.capacity, TEST_CAPACITY);
         Assertions.assertNotNull(parkingLot.slotToCar);
         Assertions.assertNotNull(parkingLot.availableSlots);
-        Assertions.assertEquals(parkingLot.availableSlots.size(), TEST_CAPACITY);
+        Assertions.assertEquals(TEST_CAPACITY, parkingLot.availableSlots.size());
 
         Assertions.assertSame(ParkingLotState.getInstance(), ParkingLotState.getInstance());
     }

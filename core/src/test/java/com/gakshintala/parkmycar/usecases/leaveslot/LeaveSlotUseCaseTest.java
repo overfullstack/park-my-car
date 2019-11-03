@@ -12,14 +12,14 @@ class LeaveSlotUseCaseTest {
     @Test
     void leaveSlotSuccessful() {
         final var leaveSlotSuccessfulUseCase = new LeaveSlotUseCase(leaveSlotSuccessful);
-        Assertions.assertEquals(leaveSlotSuccessfulUseCase.execute(new LeaveSlotCommand(TEST_SLOT)),
-                new LeaveSlotResult(true, TEST_SLOT));
+        Assertions.assertEquals(new LeaveSlotResult(true, TEST_SLOT),
+                leaveSlotSuccessfulUseCase.execute(new LeaveSlotCommand(TEST_SLOT)));
     }
 
     @Test
     void leaveSlotFailed() {
         final var leaveSlotFailedUseCase = new LeaveSlotUseCase(leaveSlotFailed);
-        Assertions.assertEquals(leaveSlotFailedUseCase.execute(new LeaveSlotCommand(TEST_SLOT)),
-                new LeaveSlotResult(false, TEST_SLOT));
+        Assertions.assertEquals(new LeaveSlotResult(false, TEST_SLOT),
+                leaveSlotFailedUseCase.execute(new LeaveSlotCommand(TEST_SLOT)));
     }
 }
