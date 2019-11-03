@@ -72,6 +72,11 @@ class ResultMappersTest {
     }
 
     @Test
+    void lotStatusMapperWithNullResult() {
+        Assertions.assertEquals(lotStatusMapper.fromResult(null), "Parking Lot is not yet Created");
+    }
+
+    @Test
     void lotStatusMapperWithOneEntry() {
         Assertions.assertEquals(lotStatusMapper.fromResult(Map.of(1, new Car("KA-01-HH-1234", "White"))),
                 String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")

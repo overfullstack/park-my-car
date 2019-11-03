@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+import static com.gakshintala.parkmycar.Command.CREATE_PARKING_LOT;
 import static com.gakshintala.parkmycar.Config.createParkingLotUseCase;
 import static com.gakshintala.parkmycar.Config.leaveSlot;
 import static com.gakshintala.parkmycar.Config.lotStatusQuery;
@@ -47,6 +48,17 @@ public class ParkMyCarApplication {
     private static void executeCommand(String lineOfCommand) {
         final var commandWithArgs = lineOfCommand.split(" ");
         final var command = Command.valueOf(commandWithArgs[0].toUpperCase());
+        
+        if (command != CREATE_PARKING_LOT && isParkingLotNotCreated()) {
+            System.out.println("Parking lot is not yet Created");
+            return;
+        }
+        if (validateArguments(commandWithArgs.length - 1, command.getNoOfArgsRequired())) {
+            System.out.println(String.format("'%s' command needs %d arguments",
+                    command.toString().toLowerCase(), command.getNoOfArgsRequired()));
+            return;
+        }
+        
         switch (command) {
             case CREATE_PARKING_LOT:
                 UseCaseExecutor.executeForConsole(
@@ -90,6 +102,16 @@ public class ParkMyCarApplication {
                         commandWithArgs[1],
                         ResultMappers.slotNumWithRegNumResultMapper);
                 break;
+            default:
+                System.out.println("Command not supported!");
         }
+    }
+
+    private static boolean isParkingLotNotCreated() {
+        return lotStatusQuery().execute(null) == null;
+    }
+
+    private static boolean validateArguments(int argLengthForCommand, int noOfArgsRequiredForCommand) {
+        return argLengthForCommand != noOfArgsRequiredForCommand;
     }
 }

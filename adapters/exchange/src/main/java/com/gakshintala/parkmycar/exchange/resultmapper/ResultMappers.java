@@ -40,17 +40,21 @@ public class ResultMappers {
 
     static final String STATUS_TABLE_HEADER_FORMAT = "%1$-12s%2$-19s%3$-20s";
     static final String STATUS_TABLE_ENTRY_FORMAT = "%1$-12d%2$-19s%3$-20s";
-    public ResultMapper<Map<Integer, Car>> lotStatusMapper = result ->
-            result.isEmpty()
-                    ? "Parking Lot is Empty"
-                    : String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")
-                    + "\n"
-                    + result.entrySet().stream()
-                    .map(entry -> String.format(STATUS_TABLE_ENTRY_FORMAT,
-                            entry.getKey(),
-                            entry.getValue().getRegistrationNumber(),
-                            entry.getValue().getColor()))
-                    .collect(Collectors.joining("\n"));
+    public ResultMapper<Map<Integer, Car>> lotStatusMapper = result -> {
+        if (result == null) {
+            return "Parking Lot is not yet Created";
+        }
+        return result.isEmpty()
+                ? "Parking Lot is Empty"
+                : String.format(STATUS_TABLE_HEADER_FORMAT, "Slot No.", "Registration No", "Colour")
+                + "\n"
+                + result.entrySet().stream()
+                .map(entry -> String.format(STATUS_TABLE_ENTRY_FORMAT,
+                        entry.getKey(),
+                        entry.getValue().getRegistrationNumber(),
+                        entry.getValue().getColor()))
+                .collect(Collectors.joining("\n"));
+    };
 
     public ResultMapper<Collection<String>> collectionToStringCommaSeparatedMapper = result ->
             String.join(", ", result);
