@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class ParkMyCarApplication {
 
-    static Consumer<String> consolePrinter = System.out::println;
+    static final Consumer<String> consolePrinter = System.out::println;
 
     public static void main(String[] args) throws IOException {
         if (args.length > 0) {

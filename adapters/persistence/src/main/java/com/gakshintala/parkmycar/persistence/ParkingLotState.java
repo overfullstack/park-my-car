@@ -44,7 +44,7 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Qu
     static final int INVALID_SLOT = 0;
 
     Supplier<Integer> getFirstFreeSlot = () -> availableSlots.first();
-    Supplier<Boolean> isLotFull = () -> availableSlots.size() == 0;
+    final Supplier<Boolean> isLotFull = () -> availableSlots.size() == 0;
 
     public static ParkingLotState getInstance() {
         return SingletonHelper.INSTANCE;

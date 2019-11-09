@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
  */
 @UtilityClass
 public class ResultMappers {
-    public ResultMapper<CreateParkingLotResult> createParkingLotResultMapper = result ->
+    public final ResultMapper<CreateParkingLotResult> createParkingLotResultMapper = result ->
             result.isSuccess()
                     ? String.format("Created a parking lot with %d slots", result.getCreatedCapacity())
                     : String.format("Parking lot is already created with capacity %d", result.getCreatedCapacity());
 
-    public ResultMapper<ParkCarResult> parkCarResultMapper = result -> {
+    public final ResultMapper<ParkCarResult> parkCarResultMapper = result -> {
         switch (result.getCarParkStatus()) {
             case SUCCESS:
                 return String.format("Allocated slot number: %d", result.getSlotId());
@@ -33,14 +33,14 @@ public class ResultMappers {
         }
     };
 
-    public ResultMapper<LeaveSlotResult> leaveSlotResultMapper = result ->
+    public final ResultMapper<LeaveSlotResult> leaveSlotResultMapper = result ->
             result.isSuccess()
                     ? String.format("Slot number %d is free", result.getSlotId())
                     : String.format("Slot %d not found", result.getSlotId());
 
     static final String STATUS_TABLE_HEADER_FORMAT = "%1$-12s%2$-19s%3$s";
     static final String STATUS_TABLE_ENTRY_FORMAT = "%1$-12d%2$-19s%3$s";
-    public ResultMapper<Map<Integer, Car>> lotStatusMapper = result -> {
+    public final ResultMapper<Map<Integer, Car>> lotStatusMapper = result -> {
         if (result == null) {
             return "Parking Lot is not yet Created";
         }
@@ -56,10 +56,10 @@ public class ResultMappers {
                 .collect(Collectors.joining("\r\n"));
     };
 
-    public ResultMapper<Collection<String>> collectionToStringCommaSeparatedMapper = result ->
+    public final ResultMapper<Collection<String>> collectionToStringCommaSeparatedMapper = result ->
             String.join(", ", result);
 
-    public ResultMapper<Optional<Integer>> slotNumWithRegNumResultMapper = result ->
+    public final ResultMapper<Optional<Integer>> slotNumWithRegNumResultMapper = result ->
             result.map(String::valueOf)
                     .orElse("Not found");
 }
