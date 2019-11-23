@@ -4,6 +4,7 @@ import com.gakshintala.parkmycar.exchange.request.CreateParkingLotRequestParser;
 import com.gakshintala.parkmycar.exchange.request.LeaveSlotRequestParser;
 import com.gakshintala.parkmycar.exchange.request.ParkCarRequestParser;
 import com.gakshintala.parkmycar.exchange.resultmapper.ResultMappers;
+import lombok.experimental.UtilityClass;
 
 import java.util.stream.Stream;
 
@@ -19,12 +20,13 @@ import static com.gakshintala.parkmycar.Config.slotNumsWithRegNumQuery;
 /**
  * gakshintala created on 11/3/19.
  */
+@UtilityClass
 public class CommandController {
 
     public static final String PARKING_LOT_IS_NOT_YET_CREATED = "Parking lot is not yet Created";
     public static final String INVALID_COMMAND = "Invalid Command";
 
-    static String executeCommand(String lineOfCommand) {
+    static String executeCommand(final String lineOfCommand) {
         final var commandWithArgs = lineOfCommand.split(" ");
         if (isValidCommand(commandWithArgs[0])) {
             final var command = Command.valueOf(commandWithArgs[0].trim().toUpperCase());
@@ -57,37 +59,37 @@ public class CommandController {
     static String getResultToRender(String[] commandWithArgs, Command command) {
         switch (command) {
             case CREATE_PARKING_LOT:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         createParkingLotUseCase(),
                         new CreateParkingLotRequestParser(commandWithArgs[1]).toCommand(),
                         ResultMappers.createParkingLotResultMapper);
             case PARK:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         parkCarUseCase(),
                         new ParkCarRequestParser(commandWithArgs[1], commandWithArgs[2]).toCommand(),
                         ResultMappers.parkCarResultMapper);
             case LEAVE:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         leaveSlot(),
                         new LeaveSlotRequestParser(commandWithArgs[1]).toCommand(),
                         ResultMappers.leaveSlotResultMapper);
             case STATUS:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         lotStatusQuery(),
                         null,
                         ResultMappers.lotStatusMapper);
             case REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         regNumsWithColorQuery(),
                         commandWithArgs[1],
                         ResultMappers.collectionToStringCommaSeparatedMapper);
             case SLOT_NUMBERS_FOR_CARS_WITH_COLOUR:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         slotNumsWithColorQuery(),
                         commandWithArgs[1],
                         ResultMappers.collectionToStringCommaSeparatedMapper);
             case SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
-                return UseCaseExecutor.executeForConsole(
+                return UseCaseExecutor.execute(
                         slotNumsWithRegNumQuery(),
                         commandWithArgs[1],
                         ResultMappers.slotNumWithRegNumResultMapper);

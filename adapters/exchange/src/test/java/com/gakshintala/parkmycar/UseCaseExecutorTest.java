@@ -13,7 +13,7 @@ class UseCaseExecutorTest {
         final ResultMapper<String> resultMapper = String::toUpperCase;
         final UseCase<String, String> useCaseStub = command -> command;
         
-        Assertions.assertEquals(UseCaseExecutor.executeForConsole(useCaseStub, useCaseDummyInput, resultMapper),
+        Assertions.assertEquals(UseCaseExecutor.execute(useCaseStub, useCaseDummyInput, resultMapper),
                 useCaseDummyInput.toUpperCase());
     }
 }

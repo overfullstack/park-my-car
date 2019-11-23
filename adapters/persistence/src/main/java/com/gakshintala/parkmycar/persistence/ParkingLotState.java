@@ -4,16 +4,18 @@ import com.gakshintala.parkmycar.domain.Car;
 import com.gakshintala.parkmycar.domain.CarParkStatus;
 import com.gakshintala.parkmycar.ports.persistence.CreateParkingLot;
 import com.gakshintala.parkmycar.ports.persistence.LeaveSlot;
-import com.gakshintala.parkmycar.ports.persistence.QueryLotStatus;
 import com.gakshintala.parkmycar.ports.persistence.ParkCar;
+import com.gakshintala.parkmycar.ports.persistence.QueryLotStatus;
 import com.gakshintala.parkmycar.usecases.parkcar.ParkCarResult;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.Map;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Supplier;
+import java.util.function.BooleanSupplier;
+import java.util.function.IntSupplier;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toCollection;
@@ -27,6 +29,7 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Qu
     Map<Integer, Car> slotToCar;
     TreeSet<Integer> availableSlots;
 
+    @UtilityClass
     static class SingletonHelper {
         private static final ParkingLotState INSTANCE = new ParkingLotState();
 
@@ -43,8 +46,8 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Qu
 
     static final int INVALID_SLOT = 0;
 
-    Supplier<Integer> getFirstFreeSlot = () -> availableSlots.first();
-    final Supplier<Boolean> isLotFull = () -> availableSlots.size() == 0;
+    IntSupplier getFirstFreeSlot = () -> availableSlots.first();
+    final BooleanSupplier isLotFull = () -> availableSlots.isEmpty();
 
     public static ParkingLotState getInstance() {
         return SingletonHelper.INSTANCE;
@@ -61,15 +64,15 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Qu
 
     @Override
     public ParkCarResult park(Car car) {
-        if (isLotFull.get()) {
+        if (isLotFull.getAsBoolean()) {
             return new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT);
         }
-        final var firstFreeSlot = getFirstFreeSlot.get();
-        slotToCar.computeIfAbsent(firstFreeSlot, slot -> {
+        final var firstFreeSlot = getFirstFreeSlot.getAsInt();
+        final var parkedCard = slotToCar.computeIfAbsent(firstFreeSlot, slot -> {
             availableSlots.remove(slot);
             return car;
         });
-        return slotToCar.get(firstFreeSlot) == car
+        return parkedCard == car
                 ? new ParkCarResult(CarParkStatus.SUCCESS, firstFreeSlot)
                 : new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT);
     }

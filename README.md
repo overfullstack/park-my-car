@@ -15,6 +15,7 @@
   - It contains Domain entities and UseCases.
   - Each feature of this app is put in a separate UseCase and all the computation related to that feature resides in that UseCase. This abides to **Single Responsibility Principle (SRP)**.
 - This layers also has Ports, which are the portals for UseCase to interact with infrastructure around.
+  
   - These Ports are interfaces which are precise slices of what is needed for that UseCase. Nothing less, nothing more. This abides to **Interface segregation principle (ISP)**.
 - These ports are implemented by external adapters, which are **Dependency Injected (DI)** at the runtime.
   - Core is agnostic of these Port implementations, so they can be easily replaced with different implementations. This abides to **Open-Closed Principle (OCP)**
@@ -43,22 +44,28 @@
 ## Functional Thinking
 
 - This has been coded following **Functional Programming (FP)** principles.
-- The entire app is a big function which takes in input and gives out an output. All the side-effects are peformed at the boundaries of the application.
+- The entire app is a big function which takes in input and gives out an output. All the side-effects are performed at the boundaries of the application.
 - All functions in core are **Pure Functions**, whose output only depends on the parameters passed to it.
-- No Unncessary inheritence overhead. `@FunctionalInterfaces` run the show.
+- No unnecessary Inheritance overhead. `@FunctionalInterfaces` run the show.
 
 ## TDD
 
 - The entire code is Test Driven.
 - Thanks to the FP style **Isolation**, across the app **No Mocks** are used. All the FunctionalInterfaces can be conviniently stubbed as per the test.
 
-### Remarks
+## Remarks
 
 Lombok is the only 3rd party lib used apart from Junit. Lombok just saves us from the verbosity of Java, generating alot of Boilerplate code. Similar features come natively in other languages like Kotlin.
 
-Fun fact, lombok is the name of an awesome island in **Indonesia**.
+Fun fact, Lombok is the name of an awesome island in **Indonesia**.
 
-## Steps to run
+## How to run?
+
+### System Prerequisites 
+
+You need **Java 13** or above to run this.
+
+### Steps
 
 From the root directory
 

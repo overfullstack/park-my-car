@@ -8,5 +8,8 @@ subprojects {
 
     apply plugin: "java"
     apply plugin: "idea"
+
+    sourceCompatibility = '13'
+    targetCompatibility = '13'
     
 }

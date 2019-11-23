@@ -11,7 +11,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class UseCaseExecutor {
 
-    public static <InputT, ResultT> String executeForConsole(
+    public static <InputT, ResultT> String execute(
             @NonNull UseCase<InputT, ResultT> useCase,
             InputT input,
             @NonNull ResultMapper<ResultT> outputMapper) {
