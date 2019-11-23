@@ -1,7 +1,0 @@
-plugins {
-    id "io.freefair.lombok" version "4.1.4"
-}
-
-dependencies {
-    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
-}

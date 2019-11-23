@@ -20,10 +20,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 #java -cp "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar com.gakshintala.parkmycar.ParkMyCarApplication "$1"
 #java -jar "$DIR"/../../app/build/libs/app-0.0.1-SNAPSHOT-all.jar "$1"
 
-##appJar file name
 appJar="$DIR"/../app/build/libs/app-0.0.1-SNAPSHOT-all.jar
-
-#../../gradlew -p "$DIR"/../../ clean shadowJar test
 
 if [ -z "$1" ] ; then
     java -jar "$appJar"

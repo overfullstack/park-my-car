@@ -1,3 +1,7 @@
+plugins {
+    id "io.freefair.lombok" version "4.1.4"
+}
+
 subprojects {
     group = "com.gakshintala.parkmycar"
     version = "0.0.1-SNAPSHOT"
@@ -8,8 +12,20 @@ subprojects {
 
     apply plugin: "java"
     apply plugin: "idea"
+    apply plugin: "io.freefair.lombok"
 
-    sourceCompatibility = '13'
-    targetCompatibility = '13'
+    java {
+        sourceCompatibility = JavaVersion.VERSION_13
+        targetCompatibility = JavaVersion.VERSION_13
+    }
+    
+    dependencies {
+        testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+    }
+
+    tasks.withType(Test) {
+        jvmArgs '--enable-preview'
+        useJUnitPlatform()
+    }
     
 }
