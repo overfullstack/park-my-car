@@ -68,11 +68,11 @@ public class ParkingLotState implements CreateParkingLot, ParkCar, LeaveSlot, Qu
             return new ParkCarResult(CarParkStatus.LOT_FULL, INVALID_SLOT);
         }
         final var firstFreeSlot = getFirstFreeSlot.getAsInt();
-        final var parkedCard = slotToCar.computeIfAbsent(firstFreeSlot, slot -> {
+        final var parkedCar = slotToCar.computeIfAbsent(firstFreeSlot, slot -> {
             availableSlots.remove(slot);
             return car;
         });
-        return parkedCard == car
+        return parkedCar == car
                 ? new ParkCarResult(CarParkStatus.SUCCESS, firstFreeSlot)
                 : new ParkCarResult(CarParkStatus.SLOT_TAKEN, INVALID_SLOT);
     }

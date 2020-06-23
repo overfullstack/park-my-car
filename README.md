@@ -62,7 +62,7 @@ Fun fact, Lombok is the name of an awesome island in **Indonesia**.
 
 ### System Prerequisites 
 
-You need **Java 13** or above to run this.
+You need **Java 14** or above to run this.
 
 ### Steps
 
@@ -72,7 +72,7 @@ From the root directory
 
 Then to interact with the application, run
 
-`bin/parking_lot # This should start an interactive shell to enter commands `
+`bin/parking_lot # This should start an interactive shell to enter commands`
 
 ## License
 

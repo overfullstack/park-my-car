@@ -8,14 +8,14 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.12/48e4e5d60309ebd833bc528dcf77668eab3cd72c/lombok-1.18.12.jar" />
         </processorPath>
-        <module name="park-my-car.adapters.test" />
         <module name="park-my-car.adapters.exchange.test" />
-        <module name="park-my-car.adapters.persistence.test" />
-        <module name="park-my-car.core.test" />
-        <module name="park-my-car.adapters.persistence.main" />
-        <module name="park-my-car.adapters.main" />
-        <module name="park-my-car.adapters.exchange.main" />
         <module name="park-my-car.app.test" />
+        <module name="park-my-car.adapters.test" />
+        <module name="park-my-car.adapters.exchange.main" />
+        <module name="park-my-car.core.test" />
+        <module name="park-my-car.adapters.main" />
+        <module name="park-my-car.adapters.persistence.test" />
+        <module name="park-my-car.adapters.persistence.main" />
         <module name="park-my-car.core.main" />
         <module name="park-my-car.app.main" />
       </profile>
