@@ -1,12 +1,11 @@
 # Park-my-Car
+Parking lot with Clean Architecture.
 
 ## Architecture
 
 ![Architecture](docs/architecture.png)
 - This is built with 'Ports & Adapters' aka 'Hexagonal' aka 'Clean' architecture.
-
 - All layers depend inwards towards the core.
-
 - This majorly has 4 modules, inorder to have clear boundaries in terms of dependencies.
 
   ### Core Module

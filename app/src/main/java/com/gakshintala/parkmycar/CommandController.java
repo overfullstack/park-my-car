@@ -56,6 +56,7 @@ public class CommandController {
         return argLengthForCommand != noOfArgsRequiredForCommand;
     }
 
+    // TODO 12/24/19 gakshintala: Refactor this by placing these mapping in the command enum itself
     static String getResultToRender(String[] commandWithArgs, Command command) {
         switch (command) {
             case CREATE_PARKING_LOT:

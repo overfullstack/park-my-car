@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "**/generated": true
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
+}

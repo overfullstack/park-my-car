@@ -1,5 +1,5 @@
 plugins {
-    id "io.freefair.lombok" version "4.1.4"
+    id "io.freefair.lombok" version "5.1.0"
 }
 
 subprojects {
@@ -15,10 +15,10 @@ subprojects {
     apply plugin: "io.freefair.lombok"
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_13
-        targetCompatibility = JavaVersion.VERSION_13
+        sourceCompatibility = JavaVersion.VERSION_14
+        targetCompatibility = JavaVersion.VERSION_14
     }
-    
+
     dependencies {
         testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     }
@@ -27,5 +27,5 @@ subprojects {
         jvmArgs '--enable-preview'
         useJUnitPlatform()
     }
-    
+
 }
