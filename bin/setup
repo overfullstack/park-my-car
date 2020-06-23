@@ -8,4 +8,4 @@
 # After this is run, bin/parking_lot
 # should Just Work.
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-./gradlew -p "$DIR"/../ clean shadowJar test
+./gradlew -p "$DIR"/../ clean build

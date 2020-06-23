@@ -32,7 +32,7 @@ public class ParkMyCarApplication {
     }
 
     private static void startInteractive() {
-        var scanner = new Scanner(System.in);
+        final var scanner = new Scanner(System.in);
         while (true) {
             final var lineOfCommand = scanner.nextLine().trim();
             if (lineOfCommand.equalsIgnoreCase("exit")) {
